@@ -201,12 +201,1772 @@ paths:
               example:
                 code: 404
                 message: User Not Found
+  /api/roles:
+    get:
+      summary: all roles
+      tags: [Roles]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Role:
+                    $ref: '#/components/schemas/Role'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/roles/{id}/show:
+    get:
+      summary: get role by id
+      tags: [Roles]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: integer
+              example:
+                id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Role:
+                    $ref: '#/components/schemas/Role'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/roles/create:
+    post:
+      summary: add role
+      tags: [Roles]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+              example:
+                name: xyz
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Role:
+                    $ref: '#/components/schemas/Role'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/roles/{id}/update:
+    put:
+      summary: update role by id
+      tags: [Roles]
+      parameters:
+        - in: query
+          name: id
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+              properties:
+                name:
+                  type: string
+              example:
+                name: xyz
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Role:
+                    $ref: '#/components/schemas/Role'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: role Not Found
+  /api/roles/{id}/delete:
+    delete:
+      summary: delete role by id
+      tags: [Roles]
+      parameters:
+        - in: query
+          name: id
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: integer
+              example:
+                id: 1
+      responses:
+        "204":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: role Not Found
+  /api/user/{user_id}/question-banks:
+    get:
+      summary: all question Banks
+      tags: [Question Banks]
+      parameters:
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: integer
+              example:
+                user_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+                  question:
+                    $ref: '#/components/schemas/Question'
+                  scheduleQuiz:
+                    $ref: '#/components/schemas/ScheduleQuiz'
+                  User:
+                    $ref: '#/components/schemas/User'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/user/{user_id}/question-banks/{id}/show:
+    get:
+      summary: get question Bank by id
+      tags: [Question Banks]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - user_id
+              properties:
+                id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                id: 1
+                user_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+                  question:
+                    $ref: '#/components/schemas/Question'
+                  scheduleQuiz:
+                    $ref: '#/components/schemas/ScheduleQuiz'
+                  User:
+                    $ref: '#/components/schemas/User'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/user/{user_id}/question-banks/create:
+    post:
+      summary: add question Bank
+      tags: [Question Banks]
+      parameters:
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - name
+                - type
+              properties:
+                user_id:
+                  type: integer
+                name:
+                  type: string
+                type:
+                  type: string
+              example:
+                user_id: 1
+                name: xyz
+                type: javascript
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/user/{user_id}/question-banks/{id}/update:
+    put:
+      summary: update question Bank by id
+      tags: [Question Banks]
+      parameters:
+        - in: query
+          name: id
+          required: true
+        - in: query
+          name: user_id
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - name
+                - type
+              properties:
+                user_id:
+                  type: integer
+                name:
+                  type: string
+                type:
+                  type: string
+              example:
+                user_id: xyz
+                name: xyz
+                type: javascript
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Question Bank Not Found
+  /api/user/{user_id}/question-banks/{id}/delete:
+    delete:
+      summary: delete question bank by id
+      tags: [Question Banks]
+      parameters:
+        - in: query
+          name: id
+          required: true
+        - in: query
+          name: user_id
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - user_id
+              properties:
+                id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                id: 1
+                user_id: 1
+      responses:
+        "204":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Question Bank Not Found
+  /api/question-banks/{question_bank_id}/questions:
+    get:
+      summary: all questions
+      tags: [Questions]
+      parameters:
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - question_bank_id
+              properties:
+                question_bank_id:
+                  type: integer
+              example:
+                question_bank_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+                  question:
+                    $ref: '#/components/schemas/Question'
+                  option:
+                    $ref: '#/components/schemas/Option'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/question-banks/{question_bank_id}/questions/{id}/show:
+    get:
+      summary: get question by id
+      tags: [Questions]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - question_bank_id
+              properties:
+                id:
+                  type: integer
+                question_bank_id:
+                  type: integer
+              example:
+                id: 1
+                question_bank_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  question:
+                    $ref: '#/components/schemas/Question'
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+                  option:
+                    $ref: '#/components/schemas/Option'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/question-banks/{question_bank_id}/questions/create:
+    post:
+      summary: add question
+      tags: [Questions]
+      parameters:
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - question_bank_id
+                - question
+                - tags
+                - marks
+              properties:
+                question_bank_id:
+                  type: integer
+                question:
+                  type: string
+                description:
+                  type: text
+                marks:
+                  type: integer
+                tags:
+                  type: string
+              example:
+                question_bank_id: 1
+                question: 'What is nodejs default port'
+                description: xyz
+                marks: 5
+                tags: php,javascript
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  question:
+                    $ref: '#/components/schemas/Question'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/question-banks/{question_bank_id}/questions/{id}/update:
+    put:
+      summary: update question by id
+      tags: [Questions]
+      parameters:
+        - in: query
+          name: id
+          required: true
+        - in: query
+          name: question_bank_id
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - question_bank_id
+                - question
+                - tags
+                - marks
+              properties:
+                question_bank_id:
+                  type: integer
+                question:
+                  type: string
+                description:
+                  type: text
+                marks:
+                  type: integer
+                tags:
+                  type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  question:
+                    $ref: '#/components/schemas/Question'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Question Not Found
+  /api/question-banks/{question_bank_id}/questions/{id}/delete:
+    delete:
+      summary: delete question by id
+      tags: [Questions]
+      parameters:
+        - in: query
+          name: id
+          required: true
+        - in: query
+          name: question_bank_id
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: integer
+              example:
+                id: 1
+      responses:
+        "204":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Question Not Found
+  /api/question-banks/{question_bank_id}/questions/{question_id}/options:
+    get:
+      summary: all options
+      tags: [Options]
+      parameters:
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+        - name: question_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - question_bank_id
+                - question_id
+              properties:
+                question_bank_id:
+                  type: integer
+                question_id:
+                  type: integer
+              example:
+                question_bank_id: 1
+                question_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Option:
+                    $ref: '#/components/schemas/Option'
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+                  question:
+                    $ref: '#/components/schemas/Question'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}/show:
+    get:
+      summary: get option by id
+      tags: [Options]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+        - name: question_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - question_bank_id
+                - question_id
+              properties:
+                id:
+                  type: integer
+                question_bank_id:
+                  type: integer
+                question_id:
+                  type: integer
+              example:
+                id: 1
+                question_bank_id: 1
+                question_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Option:
+                    $ref: '#/components/schemas/Option'
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+                  question:
+                    $ref: '#/components/schemas/Question'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/question-banks/{question_bank_id}/questions/{question_id}/options/create:
+    post:
+      summary: add option
+      tags: [Options]
+      parameters:
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+        - name: question_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - question_bank_id
+                - question_id
+                - text
+                - is_correct
+              properties:
+                question_bank_id:
+                  type: integer
+                question_id:
+                  type: integer
+                text:
+                  type: string
+                is_correct:
+                  type: boolean
+              example:
+                question_bank_id: 1
+                question_id: 1
+                text: '3000'
+                is_correct: '1'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  option:
+                    $ref: '#/components/schemas/Option'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}/update:
+    put:
+      summary: update option by id
+      tags: [Options]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+        - name: question_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - question_bank_id
+                - question_id
+                - text
+                - is_correct
+              properties:
+                question_bank_id:
+                  type: integer
+                question_id:
+                  type: integer
+                text:
+                  type: string
+                is_correct:
+                  type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  option:
+                    $ref: '#/components/schemas/Option'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Question Not Found
+  /api/question-banks/{question_bank_id}/questions/{question_id}/options/{id}/delete:
+    delete:
+      summary: delete option by id
+      tags: [Options]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: question_bank_id
+          in: path
+          type: integer
+        - name: question_id
+          in: path
+          type: integer
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - question_bank_id
+                - question_id
+              properties:
+                id:
+                  type: integer
+                question_bank_id:
+                  type: integer
+                question_id:
+                  type: integer
+              example:
+                id: 1
+                question_bank_id: 1
+                question_id: 1
+      responses:
+        "204":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Option Not Found
+  /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes:
+    get:
+      summary: all schedule Quizzes
+      tags: [Schedule Quizzes]
+      parameters:
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - question_bank_id
+              properties:
+                user_id:
+                  type: integer
+                question_bank_id:
+                  type: integer
+              example:
+                user_id: 1
+                question_bank_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scheduleQuiz:
+                    $ref: '#/components/schemas/scheduleQuiz'
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+                  User:
+                    $ref: '#/components/schemas/User'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/show:
+    get:
+      summary: get schedule Quiz by id
+      tags: [Schedule Quizzes]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - user_id
+                - question_bank_id
+              properties:
+                id:
+                  type: integer
+                user_id:
+                  type: integer
+                question_bank_id:
+                  type: integer
+              example:
+                id: 1
+                user_id: 1
+                question_bank_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scheduleQuiz:
+                    $ref: '#/components/schemas/scheduleQuiz'
+                  questionBank:
+                    $ref: '#/components/schemas/QuestionBank'
+                  User:
+                    $ref: '#/components/schemas/User'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/create:
+    post:
+      summary: add schedule Quiz
+      tags: [Schedule Quizzes]
+      parameters:
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - question_bank_id
+                - start_dateTime
+                - end_dateTime
+              properties:
+                user_id:
+                  type: integer
+                question_bank_id:
+                  type: integer
+                start_dateTime:
+                  type: timestamp
+                end_dateTime:
+                  type: timestamp
+              example:
+                user_id: 1
+                question_bank_id: 1
+                start_dateTime: '2021-10-06 01:32:45'
+                end_dateTime: '2021-10-06 02:32:45'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ScheduleQuiz:
+                    $ref: '#/components/schemas/ScheduleQuiz'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/update:
+    put:
+      summary: update schedule Quiz by id
+      tags: [Schedule Quizzes]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+        - name: question_bank_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - question_bank_id
+                - start_dateTime
+                - end_dateTime
+              properties:
+                user_id:
+                  type: integer
+                question_bank_id:
+                  type: integer
+                start_dateTime:
+                  type: timestamp
+                end_dateTime:
+                  type: timestamp
+              example:
+                user_id: 1
+                question_bank_id: 1
+                start_dateTime: '2021-10-06 01:32:45'
+                end_dateTime: '2021-10-06 02:32:45'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ScheduleQuiz:
+                    $ref: '#/components/schemas/ScheduleQuiz'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Question Not Found
+  /api/users/{user_id}/question-banks/{question_bank_id}/schedule-quizzes/{id}/delete:
+    delete:
+      summary: delete schedule Quiz by id
+      tags: [Schedule Quizzes]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+        - name: question_bank_id
+          in: path
+          type: integer
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - user_id
+                - question_bank_id
+              properties:
+                id:
+                  type: integer
+                user_id:
+                  type: integer
+                question_bank_id:
+                  type: integer
+              example:
+                id: 1
+                user_id: 1
+                question_bank_id: 1
+      responses:
+        "204":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: schedule Quiz Not Found
+  /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/user-schedule-quizzes:
+    get:
+      summary: all user schedule quizzes
+      tags: [User Schedule Quizzes]
+      parameters:
+        - name: schedule_quiz_id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - schedule_quiz_id
+                - user_id
+              properties:
+                schedule_quiz_id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                schedule_quiz_id: 1
+                user_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserScheduleQuiz:
+                    $ref: '#/components/schemas/UserScheduleQuiz'
+                  scheduleQuiz:
+                    $ref: '#/components/schemas/scheduleQuiz'
+                  User:
+                    $ref: '#/components/schemas/User'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}/show:
+    get:
+      summary: get user schedule Quiz by id
+      tags: [User Schedule Quizzes]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: schedule_quiz_id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - schedule_quiz_id
+                - user_id
+              properties:
+                id:
+                  type: integer
+                schedule_quiz_id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                id: 1
+                schedule_quiz_id: 1
+                user_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserScheduleQuiz:
+                    $ref: '#/components/schemas/UserScheduleQuiz'
+                  scheduleQuiz:
+                    $ref: '#/components/schemas/scheduleQuiz'
+                  User:
+                    $ref: '#/components/schemas/User'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/user-schedule-quizzes/create:
+    post:
+      summary: add schedule Quiz
+      tags: [User Schedule Quizzes]
+      parameters:
+        - name: schedule_quiz_id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - schedule_quiz_id
+                - user_id
+              properties:
+                schedule_quiz_id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                schedule_quiz_id: 1
+                user_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserScheduleQuiz:
+                    $ref: '#/components/schemas/UserScheduleQuiz'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}/update:
+    put:
+      summary: update user schedule Quiz by id
+      tags: [User Schedule Quizzes]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: schedule_quiz_id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - schedule_quiz_id
+                - user_id
+              properties:
+                schedule_quiz_id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                schedule_quiz_id: 1
+                user_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserScheduleQuiz:
+                    $ref: '#/components/schemas/UserScheduleQuiz'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Question Not Found
+  /api/schedule-quizzes/{schedule_quiz_id}/users/{user_id}/schedule-quizzes/{id}/delete:
+    delete:
+      summary: delete user schedule Quiz by id
+      tags: [User Schedule Quizzes]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: schedule_quiz_id
+          in: path
+          type: integer
+        - name: user_id
+          in: path
+          type: integer
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - schedule_quiz_id
+                - user_id
+              properties:
+                id:
+                  type: integer
+                schedule_quiz_id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                id: 1
+                schedule_quiz_id: 1
+                user_id: 1
+      responses:
+        "204":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: User schedule Quiz Not Found
+  /api/users/{user_id}/user-quiz-attempts:
+    get:
+      summary: all user quiz attempts
+      tags: [User Quiz Attempts]
+      parameters:
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+              properties:
+                user_id:
+                  type: integer
+              example:
+                user_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserQuizAttempt:
+                    $ref: '#/components/schemas/UserQuizAttempt'
+                  User:
+                    $ref: '#/components/schemas/User'
+                  UserQuizAttemptResponse:
+                    $ref: '#/components/schemas/UserQuizAttemptResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/users/{user_id}/user-quiz-attempts/{id}/show:
+    get:
+      summary: get user quiz attempt by id
+      tags: [User Quiz Attempts]
+      parameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - user_id
+              properties:
+                id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                id: 1
+                user_id: 1
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserQuizAttempt:
+                    $ref: '#/components/schemas/UserQuizAttempt'
+                  User:
+                    $ref: '#/components/schemas/User'
+                  UserQuizAttemptResponse:
+                    $ref: '#/components/schemas/UserQuizAttemptResponse'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/users/{user_id}/user-quiz-attempts/create:
+    post:
+      summary: add user quiz attempt
+      tags: [User Quiz Attempts]
+      parameters:
+        - name: user_id
+          in: path
+          type: integer
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - quiz_id
+                - obtained_marks
+                - has_passed
+                - is_finished
+              properties:
+                user_id:
+                  type: integer
+                quiz_id:
+                  type: integer
+                obtained_marks:
+                  type: integer
+                has_passed:
+                  type: boolean
+                is_finished:
+                  type: boolean
+              example:
+                user_id: 1
+                quiz_id: 1
+                obtained_marks: 20
+                has_passed: false
+                is_finished: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserQuizAttempt:
+                    $ref: '#/components/schemas/UserQuizAttempt'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
+  /api/users/{user_id}/user-quiz-attempts/{id}/update:
+    put:
+      summary: update user quiz attempts by id
+      tags: [User Quiz Attempts]
+      parameters:
+        - in: query
+          name: id
+          required: true
+        - in: query
+          name: user_id
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user_id
+                - quiz_id
+                - obtained_marks
+                - has_passed
+                - is_finished
+              properties:
+                user_id:
+                  type: integer
+                quiz_id:
+                  type: integer
+                obtained_marks:
+                  type: integer
+                has_passed:
+                  type: boolean
+                is_finished:
+                  type: boolean
+              example:
+                user_id: 1
+                quiz_id: 1
+                obtained_marks: 20
+                has_passed: false
+                is_finished: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserQuizAttempt:
+                    $ref: '#/components/schemas/UserQuizAttempt'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: user quiz attempts Not Found
+  /api/users/{user_id}/user-quiz-attempts/{id}/delete:
+    delete:
+      summary: delete user quiz attempts by id
+      tags: [User Quiz Attempts]
+      parameters:
+        - in: query
+          name: id
+          required: true
+        - in: query
+          name: user_id
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+                - user_id
+              properties:
+                id:
+                  type: integer
+                user_id:
+                  type: integer
+              example:
+                id: 1
+                user_id: 1
+      responses:
+        "204":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: user quiz attempts Not Found
 components:
   schemas:
     User:
       type: array
       items:
         $ref: "#/components/schemas/User"
+    Role:
+      type: array
+      items:
+        $ref: "#/components/schemas/Role"
+    QuestionBank:
+      type: array
+      items:
+        $ref: "#/components/schemas/QuestionBank"
+    Question:
+      type: array
+      items:
+        $ref: "#/components/schemas/Question"
+    Option:
+      type: array
+      items:
+        $ref: "#/components/schemas/Option"
+    ScheduleQuiz:
+      type: array
+      items:
+        $ref: "#/components/schemas/ScheduleQuiz"
+    UserScheduleQuiz:
+      type: array
+      items:
+        $ref: "#/components/schemas/UserScheduleQuiz"
+    UserQuizAttempt:
+      type: array
+      items:
+        $ref: "#/components/schemas/UserQuizAttempt"
     Error:
       type: object
       required:
