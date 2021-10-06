@@ -1695,7 +1695,7 @@ paths:
 
   # User Quiz Attempts
   files:
-  - !include include.d/user-quiz-attempts.yaml
+  - !include user-quiz-attempts.yaml
 components:
   schemas:
     User:
