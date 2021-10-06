@@ -16,28 +16,33 @@ servers:
   - url: http://quiz-portal.swagger.io/v1
 paths:
   /api/users:
-   get:
-     summary: all users
-     tags: [Users]
-     responses:
-       "200":
-         description: OK
-         content:
-           application/json:
-             schema:
-               type: object
-               properties:
-                 User:
-                   $ref: '#/components/schemas/User'
-       "404":
-         description: Not Found
-         content:
-           application/json:
-             schema:
-               $ref: '#/components/schemas/Error'
-             example:
-               code: 404
-               message: Not Found
+    get:
+      summary: all users
+      tags: [Users]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  User:
+                    $ref: '#/components/schemas/User'
+        "404":
+          description: Not Found
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: 404
+                message: Not Found
 components:
   schemas:
     User:
