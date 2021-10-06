@@ -1694,7 +1694,8 @@ paths:
                 message: User schedule Quiz Not Found
 
   # User Quiz Attempts
-  include: user-quiz-attempts.yaml
+  files:
+  - !include include.d/user-quiz-attempts.yaml
 components:
   schemas:
     User:
