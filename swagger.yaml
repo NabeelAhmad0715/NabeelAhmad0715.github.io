@@ -4,14 +4,6 @@ info:
   title: Swagger Quiz Portal
   license:
     name: MIT
-  description: |
-    ## Quiz Portal API
-
-    | Syntax | Description |
-    | ----------- | ----------- |
-    | Header | Title |
-    | Paragraph | Text |
-
 servers:
   - url: http://localhost:4000/
 paths:
